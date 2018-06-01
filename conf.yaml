@@ -1,0 +1,14 @@
+#邮箱服务器
+host: eg:smtp.qq.com
+#邮件发送地址
+from: example@qq.com
+#邮件接收地址
+to: example@qq.com
+#邮箱密码
+password: ******
+#邮箱服务器端口号
+port: 0
+#prometheus的监控地址
+prometheus_url: p_example.com
+#elasticSearch监控地址
+elasticSearch_url: e_example.com/health?pretty=true

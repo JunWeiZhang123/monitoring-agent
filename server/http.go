@@ -4,13 +4,15 @@ import (
 	"net/http"
 	"k8s.io/client-go/kubernetes"
 	"github.com/emicklei/go-restful"
+    "github.com/vinkdong/monitoring-agent/monitor"
 	prom_v1 "github.com/vinkdong/monitoring-agent/prometheus/v1"
 )
 
 var Clientset *kubernetes.Clientset
 
-func initServer(addr string) {
-	addRoute()
+func initServer(addr string) {  
+	monitor.InitMonitor()
+	addRoute()	
 	server := &http.Server{Addr:addr,Handler:restful.DefaultContainer}
 	server.ListenAndServe()
 }

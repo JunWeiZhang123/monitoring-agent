@@ -1,15 +1,14 @@
 package main
-
 import (
 	"flag"
 	"github.com/vinkdong/monitoring-agent/server"
 	"github.com/vinkdong/monitoring-agent/common"
-)
+       )
 
 var(
-	kubeconfig = flag.String("kubeconfig","","kubeconfig path file")
+        kubeconfig = flag.String("kubeconfig","","kubeconfig path file")
 	addr = flag.String("addr",":9800","which addr to bind")
-)
+   )
 
 func main()  {
 	flag.Parse()
