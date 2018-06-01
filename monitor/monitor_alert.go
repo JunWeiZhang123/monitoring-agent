@@ -19,17 +19,17 @@ config, err := yaml.ReadFile("conf.yaml")
     if err != nil {
         fmt.Println(err)
     }
-from, err :=config.Get("from")
+    from, err :=config.Get("from")
     to, err :=config.Get("to")     
     host, err :=config.Get("host")        
-password, err :=config.Get("password")
-portString, err :=config.Get("port")
-port,err:=strconv.Atoi(portString)  
+    password, err :=config.Get("password")
+    portString, err :=config.Get("port")
+    port,err:=strconv.Atoi(portString)  
     msg := gomail.NewMessage()  
     msg.SetHeader("From", from)       
     msg.SetHeader("To", to)  
     msg.SetHeader("Subject", "Alert")  
-msg.SetBody("text/html", body)  	
+    msg.SetBody("text/html", body)  	
     mailer := gomail.NewMailer(host, from, password,port)
     if err := mailer.Send(msg); err != nil {  
         return err
@@ -39,9 +39,9 @@ msg.SetBody("text/html", body)
 
 
 func addMonitorRoute()  {
-config, err := yaml.ReadFile("conf.yaml")
-ticker := time.NewTicker(time.Second * 20)
-	client := &http.Client{}
+       config, err := yaml.ReadFile("conf.yaml")
+       ticker := time.NewTicker(time.Second * 20)
+       client := &http.Client{}
 	//生成要访问的url
 	prometheus_url, err :=config.Get("prometheus_url")
 	elasticSearch_url, err :=config.Get("elasticSearch_url")
@@ -51,9 +51,9 @@ ticker := time.NewTicker(time.Second * 20)
 	if err != nil {
 		panic(err)
 	}	
-    go func() {
+        go func() {
 	    for t := range ticker.C {
-	    prometheus_response, _ := client.Do(prometheus_request)
+	        prometheus_response, _ := client.Do(prometheus_request)
 		elasticSearch_response, _ := client.Do(elasticSearch_request)
 		if(elasticSearch_response==nil || elasticSearch_response.Status!="200 ok"){
 			GoMail("elasticSearch is failed")
@@ -65,7 +65,7 @@ ticker := time.NewTicker(time.Second * 20)
 			if err != nil {
 				panic(err)
 			}	
-            if(es.Status!="green"){
+                if(es.Status!="green"){
 			GoMail("elasticSearch is failed")
 			fmt.Println("elasticSearch is failed")
 			}
